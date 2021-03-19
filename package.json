@@ -1,0 +1,27 @@
+{
+  "name": "@jun3/validator",
+  "version": "1.0.4",
+  "description": "validator",
+  "main": "./dist/src/index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "node ./dist/tests/verify.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jun3372/validator.git"
+  },
+  "keywords": [
+    "validator",
+    "validation"
+  ],
+  "author": "jun3",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jun3372/validator/issues"
+  },
+  "homepage": "https://github.com/jun3372/validator#readme"
+}
