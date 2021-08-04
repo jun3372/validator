@@ -1,6 +1,6 @@
 {
   "name": "@jun3/validator",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "validator",
   "main": "./dist/src/index.js",
   "directories": {
