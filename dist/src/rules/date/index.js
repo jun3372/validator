@@ -19,18 +19,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var rule_1 = __importDefault(require("../rule"));
-var Datev = /** @class */ (function (_super) {
-    __extends(Datev, _super);
-    function Datev() {
+var Dater = /** @class */ (function (_super) {
+    __extends(Dater, _super);
+    function Dater() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.name = 'date';
         _this.message = '日期格式错误';
         return _this;
     }
-    Datev.prototype.verify = function (value) {
+    Dater.prototype.verify = function (value) {
         var reg = /^\d{4}(-)(1[0-2]|0?\d)\1([0-2]\d|\d|30|31)$/;
         return reg.test(String(value));
     };
-    return Datev;
+    return Dater;
 }(rule_1.default));
-exports.default = Datev;
+exports.default = Dater;

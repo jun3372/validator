@@ -42,7 +42,7 @@ var Length = /** @class */ (function (_super) {
     };
     Length.prototype.verify = function (value) {
         var len = String(value).length;
-        return this._max > len && len > this._min;
+        return len > this._min && len < this._max;
     };
     return Length;
 }(rule_1.default));

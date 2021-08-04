@@ -4,8 +4,8 @@ export default class Validator {
     /**
      * 验证失败数组
      */
-    private nexts;
-    protected errors: Array<ErrorItem>;
+    private _next;
+    protected _error: Array<ErrorItem>;
     /**
      * 验证
      * @param data 验证对象

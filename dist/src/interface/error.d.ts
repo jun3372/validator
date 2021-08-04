@@ -1,5 +1,6 @@
 export default interface ErrorItem {
-    key: string;
-    vlaue: any;
+    rule: string;
     message: string;
+    key: string;
+    value: any;
 }

@@ -66,4 +66,3 @@ console.error("error=", validator.next(null));
 console.error("error=", validator.next('没有任何错误了'));
 console.error("error=", validator.next(Error('没有任何错误了')));
 console.error("error=", validator.error());
-console.error("validator=", validator);

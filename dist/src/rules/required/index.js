@@ -28,7 +28,7 @@ var Required = /** @class */ (function (_super) {
         return _this;
     }
     Required.prototype.verify = function (value) {
-        return typeof value != 'undefined' && value != '' && value != null && value != undefined;
+        return typeof value != 'undefined' && value !== '' && value != null && value != undefined;
     };
     return Required;
 }(rule_1.default));

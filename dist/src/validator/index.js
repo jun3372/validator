@@ -22,8 +22,8 @@ var Validator = /** @class */ (function () {
         /**
          * 验证失败数组
          */
-        this.nexts = [];
-        this.errors = [];
+        this._next = [];
+        this._error = [];
     }
     /**
      * 验证
@@ -33,8 +33,8 @@ var Validator = /** @class */ (function () {
      */
     Validator.prototype.verify = function (data, map, ags) {
         var _this = this;
-        this.nexts = [];
-        this.errors = [];
+        this._next = [];
+        this._error = [];
         var rules = this.rules();
         if (ags instanceof Object)
             rules = Object.assign(rules, ags);
@@ -46,7 +46,7 @@ var Validator = /** @class */ (function () {
                 var ru = rules[r];
                 if (ru == null) {
                     var message = "\u83B7\u53D6\u9700\u8981\u9A8C\u8BC1\u7684\u9A8C\u8BC1\u5668\u5931\u8D25: key=" + key + ", value=" + value + ", rule=" + rule;
-                    _this.errors.push({ key: key, vlaue: value, message: message });
+                    _this._error.push({ key: key, value: value, message: message, rule: '' });
                     console.error(message);
                     return;
                 }
@@ -73,9 +73,9 @@ var Validator = /** @class */ (function () {
                 try {
                     // 记录错误信息
                     if (!ru.verify(value)) {
-                        var error = { key: key, vlaue: value, message: ru.error };
-                        _this.nexts.push(error);
-                        _this.errors.push(error);
+                        var error = { key: key, value: value, message: ru.error, rule: ru.name };
+                        _this._next.push(error);
+                        _this._error.push(error);
                     }
                 }
                 catch (e) {
@@ -92,7 +92,7 @@ var Validator = /** @class */ (function () {
      */
     Validator.prototype.next = function (ags) {
         if (ags === void 0) { ags = undefined; }
-        return this.nexts.shift() || ags;
+        return this._next.shift() || ags;
     };
     /**
      * 获取所有错误
@@ -101,7 +101,7 @@ var Validator = /** @class */ (function () {
      */
     Validator.prototype.error = function (ags) {
         if (ags === void 0) { ags = undefined; }
-        return this.errors || ags;
+        return this._error || ags;
     };
     /**
      * 获取默认规则 map
