@@ -20,6 +20,6 @@ export default class Length extends Rule {
 
     verify(value: any): boolean {
         let len = String(value).length
-        return this._max > len && len > this._min
+        return len > this._min && len < this._max
     }
 }

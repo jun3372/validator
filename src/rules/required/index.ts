@@ -5,6 +5,6 @@ export default class Required extends Rule {
     protected message = '必填项验证失败';
 
     verify(value: any): boolean {
-        return typeof value != 'undefined' && value != '' && value != null && value != undefined
+        return typeof value != 'undefined' && value !== '' && value != null && value != undefined
     }
 }

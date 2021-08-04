@@ -1,6 +1,6 @@
 import Rule from "../rule";
 
-export default class Datev extends Rule {
+export default class Dater extends Rule {
     name = 'date'
     message = '日期格式错误'
     verify(value: any): boolean {

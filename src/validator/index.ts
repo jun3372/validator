@@ -3,7 +3,7 @@ import Max from "../rules/max";
 import Min from "../rules/min";
 import Lpr from "../rules/lpr";
 import Ed2k from "../rules/ed2k";
-import Datev from "../rules/date";
+import Dater from "../rules/date";
 import Email from "../rules/email";
 import Phone from "../rules/phone";
 import Base64 from "../rules/base64";
@@ -21,8 +21,8 @@ export default class Validator {
     /**
      * 验证失败数组
      */
-    private nexts: Array<ErrorItem> = []
-    protected errors: Array<ErrorItem> = [];
+    private _next: Array<ErrorItem> = []
+    protected _error: Array<ErrorItem> = [];
 
     /**
      * 验证
@@ -31,8 +31,8 @@ export default class Validator {
      * @returns 返回验证器
      */
     verify(data: Object, map: Array<ValidationRule>, ags?: Object): this {
-        this.nexts = []
-        this.errors = []
+        this._next = []
+        this._error = []
 
         let rules = this.rules();
         if (ags instanceof Object) rules = (<any>Object).assign(rules, ags)
@@ -46,7 +46,7 @@ export default class Validator {
                 let ru: Rule | null = rules[r]
                 if (ru == null) {
                     let message = `获取需要验证的验证器失败: key=${key}, value=${value}, rule=${rule}`
-                    this.errors.push({ key: key, vlaue: value, message: message })
+                    this._error.push({ key: key, value: value, message: message, rule: '' })
                     console.error(message)
                     return
                 }
@@ -74,9 +74,9 @@ export default class Validator {
                 try {
                     // 记录错误信息
                     if (!ru.verify(value)) {
-                        let error = { key: key, vlaue: value, message: ru.error }
-                        this.nexts.push(error)
-                        this.errors.push(error)
+                        let error = { key: key, value: value, message: ru.error, rule: ru.name }
+                        this._next.push(error)
+                        this._error.push(error)
                     }
                 } catch (e) {
                     console.error('调用验证器失败', "rule=", ru)
@@ -93,7 +93,7 @@ export default class Validator {
      * @returns 
      */
     next(ags: any = undefined): ErrorItem | null | undefined {
-        return this.nexts.shift() || ags
+        return this._next.shift() || ags
     }
 
     /**
@@ -102,7 +102,7 @@ export default class Validator {
      * @returns 
      */
     error(ags: any = undefined): Array<ErrorItem> | null | undefined {
-        return this.errors || ags;
+        return this._error || ags;
     }
 
     /**
@@ -115,7 +115,7 @@ export default class Validator {
             "min": new Min(),
             "lpr": new Lpr(),
             "ed2k": new Ed2k(),
-            "date": new Datev(),
+            "date": new Dater(),
             "email": new Email(),
             "phone": new Phone(),
             "postal": new Postal(),
